@@ -65,3 +65,62 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    """Register user"""
+    # Walkthrough says method is POST. Review later
+    if request.method == "GET":
+        return render_template("register.html")
+    elif request.method == "POST":
+        # Check for username and password and that they match
+        if not request.form.get("username"):
+            return apology("Missing username!")
+        if not request.form.get("password"):
+            return apology("Missing password!")
+        if not request.form.get("confirmation"):
+            return apology("Retype your password!")
+        if request.form.get("password") != request.form.get("confirmation"):
+            return apology("Passwords don't match!")
+
+        # Check if username is already in database
+        exists = db.execute("SELECT * FROM users WHERE username = :username",
+                            username=request.form.get("username"))
+        if len(exists) != 0:
+            return apology("That username is taken!")
+        # Encrypt password after storing user
+        hash = generate_password_hash(request.form.get("password"))
+        result = db.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)",
+                            username=request.form.get("username"), hash=hash)
+        # Log in automatically (copy from login)
+        session["user_id"] = result
+
+        return redirect("/")
+
+# PERSONAL TOUCH - LET USER CHANGE PASSWORD (using a lot from login+rgister)
+
+
+@app.route("/change", methods=["GET", "POST"])
+@login_required
+def password():
+    if request.method == "GET":
+        return render_template("change.html")
+    elif request.method == "POST":
+        # Basically compare old password field to what the old password actually was, then compare new password and its confirmation like before
+        if not request.form.get("password_1"):
+            return apology("Missing original password!")
+        if not request.form.get("password_2"):
+            return apology("Must provide new password!")
+        if not request.form.get("confirmation_2"):
+            return apology("Retype your new password!")
+        if request.form.get("password_2") != request.form.get("confirmation_2"):
+            return apology("New passwords don't match!")
+
+        hash_2 = db.execute("SELECT hash FROM users WHERE id=:id", id=session["user_id"])
+
+        if not check_password_hash(hash_2[0]['hash'], request.form.get("password_1")):
+            return apology("Original password is incorrect")
+        passhash = generate_password_hash(request.form.get("password_2"))
+        db.execute("UPDATE users SET hash=:hash WHERE id=:id", hash=passhash, id=session["user_id"])
+
+        flash("Your password has been changed!")
+        return redirect("/")
