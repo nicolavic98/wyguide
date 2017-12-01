@@ -75,7 +75,6 @@ def logout():
 @app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
-    # Walkthrough says method is POST. Review later
     if request.method == "GET":
         return render_template("register.html")
     elif request.method == "POST":
