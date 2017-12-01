@@ -17,7 +17,9 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///finance.db")
 
-
+@app.route("/index")
+@login_required
+def index():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
