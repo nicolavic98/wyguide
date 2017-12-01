@@ -17,9 +17,7 @@ Session(app)
 # Configure CS50 Library to use SQLite database
 db = SQL("sqlite:///finance.db")
 
-@app.route("/index")
-@login_required
-def index():
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -98,9 +96,6 @@ def register():
 
         return redirect("/")
 
-# PERSONAL TOUCH - LET USER CHANGE PASSWORD (using a lot from login+rgister)
-
-
 @app.route("/change", methods=["GET", "POST"])
 @login_required
 def password():
@@ -127,6 +122,18 @@ def password():
         flash("Your password has been changed!")
         return redirect("/")
     
+@app.route("/rank", methods=["GET", "POST"])
+def rank():
+    if request.method == "GET":
+        return render_template("rank.html")
+    elif request.method == "POST":
+        ##reviews = 
+        if not reviews:
+            return apology("This teacher and class combo is nonexistent!")
+        else:
+            ##rows['price'] = usd(rows['price'])
+            return render_template("ranked.html")
+
     
     
 def errorhandler(e):
