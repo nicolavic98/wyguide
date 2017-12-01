@@ -147,7 +147,7 @@ def rank():
     if request.method == "GET":
         return render_template("rank.html", classes=classes, teacher = teacher)
     elif request.method == "POST":
-        ##reviews =
+        reviews = db.execute(SELECT teacher FROM class_info WHERE teacher=request.form.get("teacher")
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
@@ -160,7 +160,7 @@ def review():
      if request.method == "GET":
         return render_template("review.html")
      elif request.method == "POST":
-        ##reviews =
+        reviews = db.execute(SELECT teacher FROM class_info WHERE teacher=request.form.get("teacher")
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
