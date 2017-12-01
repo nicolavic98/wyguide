@@ -147,23 +147,26 @@ def rank():
     if request.method == "GET":
         return render_template("rank.html", classes=classes, teacher = teacher)
     elif request.method == "POST":
-        reviews = db.execute(SELECT teacher FROM class_info WHERE teacher=request.form.get("teacher")
+        reviews = db.execute("SELECT teacher FROM class_info WHERE teacher = :teacher", teacher = request.form.get("teacher"))
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
-            ##rows['price'] = usd(rows['price'])
             return render_template("ranked.html")
 
 @app.route("/review", methods=["GET", "POST"])
 @login_required
 def review():
-     if request.method == "GET":
-        return render_template("review.html")
-     elif request.method == "POST":
-        reviews = db.execute(SELECT teacher FROM class_info WHERE teacher=request.form.get("teacher")
-        if not reviews:
-            return apology("This teacher and class combo is nonexistent!")
-        else:
+
+    classes = db.execute("SELECT * FROM classes")
+    teacher = db.execute("SELECT * FROM teachers")
+
+    if request.method == "GET":
+        return render_template("review.html", classes=classes, teacher = teacher)
+    elif request.method == "POST":
+        ##reviews =
+        #if not reviews:
+            #return apology("This teacher and class combo is nonexistent!")
+        #else:
             return render_template("reviewed.html")
 
 def errorhandler(e):
