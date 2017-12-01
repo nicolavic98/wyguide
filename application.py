@@ -33,7 +33,7 @@ db = SQL("sqlite:///wyguide.db")
 @app.route("/")
 @login_required
 def index():
-    return redirect("/")
+    return render_template("index.html")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -81,7 +81,7 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-app.route("/register", methods=["GET", "POST"])
+@app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
     if request.method == "GET":
@@ -103,13 +103,14 @@ def register():
         if len(exists) != 0:
             return apology("That username is taken!")
         # Encrypt password after storing user
-        hash = generate_password_hash(request.form.get("password"))
+        hashed = generate_password_hash(request.form.get("password"))
         result = db.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)",
-                            username=request.form.get("username"), hash=hash)
+                             username=request.form.get("username"), hash=hashed)
+
         # Log in automatically (copy from login)
         session["user_id"] = result
 
-        return redirect("/")
+        return redirect("/index.html")
 
 @app.route("/change", methods=["GET", "POST"])
 @login_required
@@ -136,13 +137,17 @@ def password():
 
         flash("Your password has been changed!")
         return redirect("/")
-    
+
 @app.route("/rank", methods=["GET", "POST"])
 def rank():
+
+    classes = db.execute("SELECT * FROM classes")
+    teacher = db.execute("SELECT * FROM teachers")
+
     if request.method == "GET":
-        return render_template("rank.html")
+        return render_template("rank.html", classes=classes, teacher = teacher)
     elif request.method == "POST":
-        ##reviews = 
+        ##reviews =
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
@@ -160,7 +165,7 @@ def review():
             return apology("This teacher and class combo is nonexistent!")
         else:
             return render_template("reviewed.html")
-    
+
 def errorhandler(e):
     """Handle error"""
     return apology(e.name, e.code)
