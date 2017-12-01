@@ -138,7 +138,18 @@ def rank():
             ##rows['price'] = usd(rows['price'])
             return render_template("ranked.html")
 
-    
+@app.route("/review", methods=["GET", "POST"])
+@login_required
+def review():
+     if request.method == "GET":
+        return render_template("review.html")
+     elif request.method == "POST":
+        ##reviews =
+        if not reviews:
+            return apology("This teacher and class combo is nonexistent!")
+        else:
+            ##rows['price'] = usd(rows['price'])
+            return render_template("reviewed.html")
     
 def errorhandler(e):
 """Handle error"""
