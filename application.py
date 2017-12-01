@@ -148,7 +148,8 @@ def rank():
         return render_template("rank.html", classes=classes, teacher = teacher)
     elif request.method == "POST":
         teacher = request.form.get("teacher")
-        reviews = db.execute("SELECT teacher FROM class_info JOIN classes ON class_info.name=classes.name WHERE teacher=teacher")
+        class = request.form.get("class")
+        reviews = db.execute("SELECT teacher FROM class_info WHERE class=:class and teacher=:teacher)
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
@@ -165,7 +166,8 @@ def review():
         return render_template("review.html", classes=classes, teacher = teacher)
     elif request.method == "POST":
         teacher = request.form.get("teacher")
-        reviews = db.execute("SELECT teacher FROM class_info JOIN classes ON class_info.name=classes.name WHERE teacher=teacher")
+        class = request.form.get("class")
+        reviews = db.execute("SELECT teacher FROM class_info WHERE class=:class and teacher=:teacher)
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
