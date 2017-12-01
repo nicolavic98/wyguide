@@ -171,13 +171,19 @@ def review():
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
-            return render_template("reviewed.html")
+            return redirect("/reviewed")
 
 @app.route("/reviewed", methods=["GET", "POST"])
 @login_required
 def reviewed():
+    if request.method == "GET":
+        return render_template("reviewed.html")
     if request.method == "POST":
-        return render_template(index.html)
+        db.execute("INSERT INTO teacher_info (overall, clarity, friendliness, comments) VALUES(:overall, :clarity, :friendliness, :comments)",
+                    overall=request.form.get("overall"), clarity=request.form.get("clarity"), friendliness=request.form.get("friendliness"),
+                    comments=request.form.get("comments"))
+        flash('You successfully submitted a review!')
+        return render_template("index.html")
 
 
 
