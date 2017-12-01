@@ -15,7 +15,7 @@ app.config["SESSION_TYPE"] = "filesystem"
 Session(app)
 
 # Configure CS50 Library to use SQLite database
-db = SQL("sqlite:///finance.db")
+db = SQL("sqlite:///wyguide.db")
 
 
 @app.route("/")
@@ -148,7 +148,6 @@ def review():
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
-            ##rows['price'] = usd(rows['price'])
             return render_template("reviewed.html")
     
 def errorhandler(e):
