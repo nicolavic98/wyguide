@@ -1,1 +1,62 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Rank
+{% endblock %}
+
+
+{% block main %}
+
+    <center> <strong> <font size="+4"> SUBMIT YOUR REVIEW! </font> </strong></center>
+
+<form action="/reviewed" method="post">
+    <left> <strong> On a scale of 1 to 5, how would you rate this teacher overall? </strong> </left>
+    <div class="form-group">
+        <input type="radio" name="overall" value="1"> 1 = TERRIBLE<br>
+        <input type="radio" name="overall" value="2"> 2<br>
+        <input type="radio" name="overall" value="3"> 3<br>
+        <input type="radio" name="overall" value="4"> 4<br>
+        <input type="radio" name="overall" value="5"> 5 = AMAZING!
+    </div>
+
+<br>
+
+    <left> <strong> On a scale of 1 to 5, how would you rate this teacher's clarity in teaching? </strong> </left>
+    <div class="form-group">
+        <input type="radio" name="clarity" value="1"> 1 = TOTALLY UNCLEAR<br>
+        <input type="radio" name="clarity" value="2"> 2<br>
+        <input type="radio" name="clarity" value="3"> 3<br>
+        <input type="radio" name="clarity" value="4"> 4<br>
+        <input type="radio" name="clarity" value="5"> 5 = I UNDERSTOOD EVERYTHING!
+    </div>
+
+<br>
+
+    <left> <strong> On a scale of 1 to 5, how would you rate this teacher's friendliness? </strong> </left>
+    <div class="form-group">
+        <input type="radio" name="friendliness" value="1"> 1 = COLD LIKE A CHICAGO WINTER<br>
+        <input type="radio" name="friendliness" value="2"> 2<br>
+        <input type="radio" name="friendliness" value="3"> 3<br>
+        <input type="radio" name="friendliness" value="4"> 4<br>
+        <input type="radio" name="friendliness" value="5"> 5 = WARM AS A SLICE OF DEEP DISH PIZZA!
+    </div>
+
+<br>
+
+    <left> <strong> Any additional comments you'd like to add? </strong> </left>
+    <br>
+    <div class="form-group">
+        <textarea name="comments" cols="100" rows="7"></textarea>
+    </div>
+
+<br>
+
+    <div class="form-group">
+        <button class="btn btn-primary" type="submit" name="submit" value = "value">Submit</button>
+    </div>
+</form>
+
+
+{% endblock %}
+
 
