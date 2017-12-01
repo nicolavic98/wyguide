@@ -1,1 +1,28 @@
+{% extends "layout.html" %}
 
+{% block title %}
+    Rankings
+{% endblock %}
+
+{% block main %}
+
+<table class="table table-striped">
+    <tr>
+        <thead>
+            <th>Teacher Name</th>
+            <th>Avg. Overall Rating</th>
+        </thead>
+    </tr>
+
+    {% for each in teacher_info %}
+    <tr>
+
+            <td> {{ each.id }} </td>
+            <td> {{ each.overall }} </td>
+
+
+    </tr>
+    {% endfor %}
+
+
+{% endblock %}
