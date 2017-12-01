@@ -8,6 +8,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required, lookup
 from datetime import datetime
 
+# Configure application
+app = Flask(__name__)
+
 # Configure session to use filesystem (instead of signed cookies)
 app.config["SESSION_FILE_DIR"] = mkdtemp()
 app.config["SESSION_PERMANENT"] = False
@@ -151,8 +154,8 @@ def review():
             return render_template("reviewed.html")
     
 def errorhandler(e):
-"""Handle error"""
-return apology(e.name, e.code)
+    """Handle error"""
+    return apology(e.name, e.code)
 
 
 # listen for errors
