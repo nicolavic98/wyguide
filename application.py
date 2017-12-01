@@ -148,8 +148,8 @@ def rank():
         return render_template("rank.html", classes=classes, teacher = teacher)
     elif request.method == "POST":
         teacher = request.form.get("teacher")
-        class = request.form.get("class")
-        reviews = db.execute("SELECT teacher FROM class_info WHERE class=:class and teacher=:teacher)
+        class1 = request.form.get("class")
+        reviews = db.execute("SELECT teacher FROM class_info WHERE name = :class1 AND teacher = :teacher", class1 = class1, teacher = teacher)
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
@@ -166,12 +166,20 @@ def review():
         return render_template("review.html", classes=classes, teacher = teacher)
     elif request.method == "POST":
         teacher = request.form.get("teacher")
-        class = request.form.get("class")
-        reviews = db.execute("SELECT teacher FROM class_info WHERE class=:class and teacher=:teacher)
+        class1 = request.form.get("class")
+        reviews = db.execute("SELECT teacher FROM class_info WHERE name = :class1 AND teacher = :teacher", class1 = class1, teacher = teacher)
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
             return render_template("reviewed.html")
+
+@app.route("/reviewed", methods=["GET", "POST"])
+@login_required
+def reviewed():
+    if request.method == "POST":
+        return render_template(index.html)
+
+
 
 def errorhandler(e):
     """Handle error"""
