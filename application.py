@@ -81,7 +81,7 @@ def logout():
     # Redirect user to login form
     return redirect("/")
 
-@app.route("/register", methods=["GET", "POST"])
+app.route("/register", methods=["GET", "POST"])
 def register():
     """Register user"""
     if request.method == "GET":
