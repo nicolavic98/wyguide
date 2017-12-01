@@ -18,6 +18,10 @@ Session(app)
 db = SQL("sqlite:///finance.db")
 
 
+@app.route("/")
+@login_required
+def index():
+    return redirect("/")
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
