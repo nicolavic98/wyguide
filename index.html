@@ -5,48 +5,7 @@
 {% endblock %}
 
 {% block main %}
-<!-- https://www.w3schools.com/html/html_tables.asp -->
 
-<table class="table table-striped">
-    <tr>
-        <thead>
-            <th>Symbol</th>
-            <th>Name</th>
-            <th>Shares</th>
-            <th>Price</th>
-            <th>TOTAL</th>
-        </thead>
-    </tr>
-
-    {% for things in portfolio %}
-    <tr>
-
-            <td> {{ things.symbol }} </td>
-            <td> {{ things.symbol }} </td>
-            <!--<th> {{ things.name }} </th>-->
-            <td> {{ things.number }} </td>
-            <td> {{ things.cost }} </td>
-            <td> {{ things.total }}</td>
-
-    </tr>
-    {% endfor %}
-    <tr>
-        <tbody>
-            <td> CASH </td>
-            <th>  </th>
-            <th>  </th>
-            <th>  </th>
-            <td> {{ cash | usd }} </td>
-    </tr>
-    <tr>
-
-            <td> TOTAL </td>
-            <th>  </th>
-            <th>  </th>
-            <th>  </th>
-            <td> {{ total | usd }} </td>
-        </tbody>
-    </tr>
-</table>
+    Welcome to the Whitney M. Young Magnet High School Q Guide!
 
 {% endblock %}
