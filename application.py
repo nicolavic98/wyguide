@@ -179,9 +179,9 @@ def reviewed():
     if request.method == "GET":
         return render_template("reviewed.html")
     if request.method == "POST":
-        db.execute("INSERT INTO teacher_info (overall, clarity, friendliness, comments) VALUES(:overall, :clarity, :friendliness, :comments)",
+        db.execute("INSERT INTO teacher_info (overall, clarity, friendliness, comments, id) VALUES(:overall, :clarity, :friendliness, :comments, :id)",
                     overall=request.form.get("overall"), clarity=request.form.get("clarity"), friendliness=request.form.get("friendliness"),
-                    comments=request.form.get("comments"))
+                    comments=request.form.get("comments"), id=session["user_id"])
         flash('You successfully submitted a review!')
         return render_template("index.html")
 
