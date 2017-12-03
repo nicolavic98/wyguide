@@ -110,7 +110,7 @@ def register():
         # Log in automatically (copy from login)
         session["user_id"] = result
 
-        return redirect("/index.html")
+        return redirect("/")
 
 @app.route("/change", methods=["GET", "POST"])
 @login_required
@@ -149,11 +149,12 @@ def rank():
     elif request.method == "POST":
         teacher = request.form.get("teacher")
         class1 = request.form.get("class")
+
         reviews = db.execute("SELECT teacher FROM class_info WHERE name = :class1 AND teacher = :teacher", class1 = class1, teacher = teacher)
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
-            return render_template("ranked.html")
+            return render_template("ranked.html", teacher=teacher, class1=class1, overall=overall, friendliness=friendliness, clarity=clarity, comments=comments)
 
 @app.route("/review", methods=["GET", "POST"])
 @login_required
