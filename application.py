@@ -166,6 +166,7 @@ def review():
         return render_template("review.html", classes=classes, teacher=teacher)
     elif request.method == "POST":
         teacher = request.form.get("teacher")
+        session['teacher']=teacher
         class1 = request.form.get("class")
         reviews = db.execute("SELECT teacher FROM class_info WHERE name = :class1 AND teacher = :teacher", class1 = class1, teacher = teacher)
         if not reviews:
@@ -179,8 +180,8 @@ def reviewed():
     if request.method == "GET":
         return render_template("reviewed.html")
     if request.method == "POST":
-        reviews=db.execute("INSERT INTO teacher_info (overall, clarity, friendliness, comments) VALUES(:overall, :clarity, :friendliness, :comments)",
-                    overall=request.form.get("overall"), clarity=request.form.get("clarity"), friendliness=request.form.get("friendliness"),
+        reviews=db.execute("INSERT INTO teacher_info (name, overall, clarity, friendliness, comments) VALUES(:name, :overall, :clarity, :friendliness, :comments)",
+                    name=session.get('teacher'), overall=request.form.get("overall"), clarity=request.form.get("clarity"), friendliness=request.form.get("friendliness"),
                     comments=request.form.get("comments"))
         flash('You successfully submitted a review!')
         return render_template("index.html")
