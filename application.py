@@ -103,9 +103,9 @@ def register():
         if len(exists) != 0:
             return apology("That username is taken!")
         # Encrypt password after storing user
-        hashed = generate_password_hash(request.form.get("password"))
+        hash = generate_password_hash(request.form.get("password"))
         result = db.execute("INSERT INTO users (username, hash) VALUES(:username, :hash)",
-                             username=request.form.get("username"), hash=hashed)
+                             username=request.form.get("username"), hash=hash)
 
         # Log in automatically (copy from login)
         session["user_id"] = result
@@ -163,7 +163,7 @@ def review():
     teacher = db.execute("SELECT * FROM teachers")
 
     if request.method == "GET":
-        return render_template("review.html", classes=classes, teacher = teacher)
+        return render_template("review.html", classes=classes, teacher=teacher)
     elif request.method == "POST":
         teacher = request.form.get("teacher")
         class1 = request.form.get("class")
@@ -171,7 +171,7 @@ def review():
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
-            return redirect("/reviewed")
+            return render_template("reviewed.html", class1=class1, teacher=teacher)
 
 @app.route("/reviewed", methods=["GET", "POST"])
 @login_required
