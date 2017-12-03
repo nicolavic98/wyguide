@@ -7,15 +7,15 @@
 {% block main %}
     <form action="/register" method="post">
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
+            <center> <input style="width: 500px" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/> </center>
         </div>
         <div class="form-group">
-            <input class="form-control" name="password" placeholder="password" type="password"/>
+            <center> <input style="width: 500px" class="form-control" name="password" placeholder="Enter password" type="password"/> </center>
         </div>
         <div class="form-group">
-            <input class="form-control" name="confirmation" placeholder="Type Password Again" type="password"/>
+            <center> <input style="width: 500px" class="form-control" name="confirmation" placeholder="Confirm your password" type="password"/> </center>
         </div>
         <!--Change button from login to register-->
-        <button class="btn btn-primary" type="submit">Register</button>
+        <center> <button class="btn btn-primary" type="submit">Register</button> </center>
     </form>
 {% endblock %}
