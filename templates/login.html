@@ -5,13 +5,18 @@
 {% endblock %}
 
 {% block main %}
+
+    <center> <strong> Log in to submit reviews! </strong></center>
+    <br>
+    <center> <img style="width:250px;height:250px;" alt=" " class="border" src="https://pbs.twimg.com/profile_images/771461277499715585/EZCw9fp3.jpg"/> </center>
+    <br>
     <form action="/login" method="post">
         <div class="form-group">
-            <input autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/>
+            <center> <input style="width: 500px" autocomplete="off" autofocus class="form-control" name="username" placeholder="Username" type="text"/> </center>
         </div>
         <div class="form-group">
-            <input class="form-control" name="password" placeholder="Password" type="password"/>
+            <center> <input style="width: 500px" class="form-control" name="password" placeholder="Password" type="password"/> </center>
         </div>
-        <button class="btn btn-primary" type="submit">Log In</button>
+        <center> <button class="btn btn-primary" type="submit">Log In</button> </center>
     </form>
 {% endblock %}
