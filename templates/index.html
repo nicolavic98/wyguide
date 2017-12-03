@@ -1,3 +1,4 @@
+
 {% extends "layout.html" %}
 
 {% block title %}
@@ -6,7 +7,30 @@
 
 {% block main %}
 
-    <center> <u> <strong> <font size="+3"> Welcome to the Whitney M. Young Magnet High School Q Guide! </font> </strong> </ul> </center>
+    <center> <strong> <font size="+3"> Welcome to the Whitney M. Young Magnet High School Q Guide! </font> </strong> </center>
+    <center> Check out the average ratings for your favorite teachers! </center>
+
+    <table class="table table-striped">
+    <tr>
+        <thead>
+            <th>Teacher</th>
+            <th></th>
+            <th></th>
+            <th>Overall Rating</th>
+        </thead>
+    </tr>
+<br>
+    {% for each in teacher_info %}
+    <tr>
+
+            <td> {{ each.name }} </td>
+            <td></td>
+            <td></td>
+            <td> {{ each.overall }} </td>
+
+
+    </tr>
+    {% endfor %}
 
 
 {% endblock %}
