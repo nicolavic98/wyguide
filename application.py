@@ -36,10 +36,6 @@ def index():
     new=db.execute("SELECT name, overall FROM teacher_info ORDER BY overall DESC")
     return render_template("index.html", teacher_info = new)
 
-@app.route("/about")
-def about():
-    return render_template("about.html")
-
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
@@ -161,13 +157,9 @@ def rank():
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
+            new=db.execute("SELECT overall, friendliness, clarity, comments FROM teacher_info WHERE class_name = :class1 AND name = :teacher", class1 = class1, teacher = teacher)
+            return render_template("ranked.html", class1=class1, teacher=teacher, teacher_info = new)
             return redirect("/ranked")
-
-@app.route("/ranked", methods=["GET"])
-def ranked():
-    if request.method == "GET":
-        data=db.execute("SELECT name, overall, friendliness, clarity, comments FROM teacher_info WHERE name= :teacher and class_name= :class1", class1=session.get('class1'), teacher=session.get('teacher'))
-        return render_template("ranked.html", teacher_info=data)
 
 
 @app.route("/review", methods=["GET", "POST"])
@@ -200,7 +192,7 @@ def reviewed():
                     name=session.get('teacher'), class_name=session.get('class1'), overall=request.form.get("overall"), clarity=request.form.get("clarity"), friendliness=request.form.get("friendliness"),
                     comments=request.form.get("comments"))
         flash('You successfully submitted a review!')
-        return render_template("index.html")
+        return redirect("/")
 
 
 
