@@ -33,7 +33,8 @@ db = SQL("sqlite:///wyguide.db")
 @app.route("/")
 @login_required
 def index():
-    return render_template("index.html")
+    new= db.execute("SELECT name, overall FROM teacher_info ORDER BY overall DESC")
+    return render_template("index.html", teacher_info = new)
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -154,7 +155,10 @@ def rank():
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
-            return render_template("ranked.html", teacher=teacher, class1=class1, overall=overall, friendliness=friendliness, clarity=clarity, comments=comments)
+            # overall = db.execute("SELECT overall FROM teacher_info WHERE name = ")
+            # # friendliness=db.execute("SELECT friendliness FROM teacher_info")
+            # clarity=db.execute("SELECT clarity FROM teacher_info")
+            return render_template("ranked.html", teacher=teacher, class1=class1, overall=overall, friendliness=friendliness, clarity=clarity)
 
 @app.route("/review", methods=["GET", "POST"])
 @login_required
