@@ -1,1 +1,1 @@
-Our project was implemented with Python, HTML, Flask, and SQL. We wanted our website to be modern and user-friendly, as reflected in design choices. 
+Our project was implemented with Python, HTML, Flask, and SQL. We wanted our website to be modern and user-friendly, as reflected in design choices. We also themed the website to be blue and orange, our school's colors. 
