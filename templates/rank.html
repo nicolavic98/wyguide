@@ -1,33 +1,32 @@
 {% extends "layout.html" %}
 
 {% block title %}
-    Rankings
+    Rank
 {% endblock %}
+
 
 {% block main %}
 
-<table class="table table-striped">
-    <tr>
-        <center><h1> {{ teacher }}'s {{ class1 }}</h1></center>
-        <thead>
-            <th>Clarity</th>
-            <th>Friendliness</th>
-            <th>Overall Rating</th>
-            <th>Comments</th>
-        </thead>
-    </tr>
+    <form action="/rank" method="post">
+         <div class="form-group">
+            <select class="form-control" name="class">
+                <option disabled selected value="">Select course</option>
+                {% for each in classes %}
+                    <option value = "{{ each.name }}" > {{ each.name }} </option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control" name="teacher">
+                <option disabled selected value="">Select teacher</option>
+                {% for each in teacher %}
+                    <option value = "{{ each.name }}" > {{ each.name }} </option>
+                {% endfor %}
+            </select>
+        </div>
 
-    {% for each in teacher_info %}
-    <tr>
-
-            <td> {{ each.clarity }} </td>
-            <td> {{ each.friendliness }} </td>
-            <td> {{ each.overall }} </td>
-            <td> {{ each.comments }} </td>
-
-
-    </tr>
-    {% endfor %}
-
+        <button class="btn btn-primary" type="submit" name="submit">Submit</button>
+        </div>
+    </form>
 
 {% endblock %}
