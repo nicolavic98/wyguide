@@ -1,0 +1,1 @@
+Our project was implemented with Python, HTML, Flask, and SQL. We wanted our website to be modern and user-friendly, as reflected in design choices. 
