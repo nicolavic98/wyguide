@@ -33,7 +33,7 @@ db = SQL("sqlite:///wyguide.db")
 @app.route("/")
 @login_required
 def index():
-    new= db.execute("SELECT name, overall FROM teacher_info ORDER BY overall DESC")
+    new=db.execute("SELECT name, overall FROM teacher_info ORDER BY overall DESC")
     return render_template("index.html", teacher_info = new)
 
 @app.route("/login", methods=["GET", "POST"])
@@ -150,15 +150,21 @@ def rank():
     elif request.method == "POST":
         teacher = request.form.get("teacher")
         class1 = request.form.get("class")
+        session['teacher']=teacher
+        session['class1']=class1
 
         reviews = db.execute("SELECT teacher FROM class_info WHERE name = :class1 AND teacher = :teacher", class1 = class1, teacher = teacher)
         if not reviews:
             return apology("This teacher and class combo is nonexistent!")
         else:
-            # overall = db.execute("SELECT overall FROM teacher_info WHERE name = ")
-            # # friendliness=db.execute("SELECT friendliness FROM teacher_info")
-            # clarity=db.execute("SELECT clarity FROM teacher_info")
-            return render_template("ranked.html", teacher=teacher, class1=class1, overall=overall, friendliness=friendliness, clarity=clarity)
+            return redirect("/ranked")
+
+@app.route("/ranked", methods=["GET"])
+def ranked():
+    if request.method == "GET":
+        data=db.execute("SELECT name, overall, friendliness, clarity, comments FROM teacher_info WHERE name= :teacher and class_name= :class1", class1=session.get('class1'), teacher=session.get('teacher'))
+        return render_template("ranked.html", teacher_info=data)
+
 
 @app.route("/review", methods=["GET", "POST"])
 @login_required
