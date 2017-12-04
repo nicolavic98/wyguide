@@ -8,11 +8,11 @@
 
 <table class="table table-striped">
     <tr>
+        <center><h1> {{ teacher }}'s {{ class1 }}</h1></center>
         <thead>
-            <th>Teacher Name</th>
             <th>Clarity</th>
             <th>Friendliness</th>
-            <th>Avg. Overall Rating</th>
+            <th>Overall Rating</th>
             <th>Comments</th>
         </thead>
     </tr>
@@ -20,7 +20,6 @@
     {% for each in teacher_info %}
     <tr>
 
-            <td> {{ each.name }} </td>
             <td> {{ each.clarity }} </td>
             <td> {{ each.friendliness }} </td>
             <td> {{ each.overall }} </td>
