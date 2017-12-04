@@ -37,6 +37,7 @@ def index():
     return render_template("index.html", teacher_info = new)
 
 @app.route("/about")
+def about():
     return render_template("about.html")
 
 @app.route("/login", methods=["GET", "POST"])
