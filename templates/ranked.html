@@ -10,15 +10,21 @@
     <tr>
         <thead>
             <th>Teacher Name</th>
+            <th>Clarity</th>
+            <th>Friendliness</th>
             <th>Avg. Overall Rating</th>
+            <th>Comments</th>
         </thead>
     </tr>
 
     {% for each in teacher_info %}
     <tr>
 
-            <td> {{ each.id }} </td>
+            <td> {{ each.name }} </td>
+            <td> {{ each.clarity }} </td>
+            <td> {{ each.friendliness }} </td>
             <td> {{ each.overall }} </td>
+            <td> {{ each.comments }} </td>
 
 
     </tr>
