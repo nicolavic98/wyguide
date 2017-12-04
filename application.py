@@ -36,6 +36,9 @@ def index():
     new=db.execute("SELECT name, overall FROM teacher_info ORDER BY overall DESC")
     return render_template("index.html", teacher_info = new)
 
+@app.route("/about")
+    return render_template("about.html")
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     """Log user in"""
