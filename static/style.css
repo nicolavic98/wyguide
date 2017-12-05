@@ -9,18 +9,6 @@ nav .navbar-brand .blue
 {
     color: #537fbe;
 }
-nav .navbar-brand .red
-{
-    color: #ea433b;
-}
-nav .navbar-brand .yellow
-{
-    color: #f5b82e;
-}
-nav .navbar-brand .green
-{
-    color: #2e944b;
-}
 
 main .form-control
 {
@@ -37,11 +25,41 @@ main
     overflow-x: auto;
 
     /* center contents */
-    text-align: center;
+    text-align: left;
 }
 
 main img
 {
     /* constrain images on small screens */
     max-width: 100%;
+}
+
+
+li a {
+    display: block;
+    color: #000;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+
+/* Change the link color on hover */
+li a:hover {
+    background-color: #555;
+    color: white;
+}
+
+.active {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+/* Changes the table background color (or at least attempts to) */
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+   background-color: #A0D2FD;
+}
+.table-striped>tbody>tr:nth-child(even)>td,
+.table-striped>tbody>tr:nth-child(even)>th {
+   background-color: #FFC270;
 }
