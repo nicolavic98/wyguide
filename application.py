@@ -8,6 +8,9 @@ from werkzeug.security import check_password_hash, generate_password_hash
 from helpers import apology, login_required
 from datetime import datetime
 
+import plotly.plotly as py
+import plotly.graph_objs as go
+
 # Configure application
 app = Flask(__name__)
 
@@ -33,7 +36,7 @@ db = SQL("sqlite:///wyguide.db")
 @app.route("/")
 @login_required
 def index():
-    new=db.execute("SELECT name, overall FROM teacher_info ORDER BY overall DESC")
+    new=db.execute("SELECT name, overall FROM teacher_info ORDER BY overall DESC LIMIT 10")
     return render_template("index.html", teacher_info = new)
 
 @app.route("/about")
