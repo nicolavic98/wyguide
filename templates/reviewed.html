@@ -7,12 +7,14 @@
 
 {% block main %}
 
-<center><h1> {{ teacher }}'s {{ class1 }}</h1></center>
+<font size="+2"> <u> SUBMIT YOUR REVIEW OF: </u> </font>
 
-    <center> <strong> <font size="+4"> SUBMIT YOUR REVIEW! </font> </strong></center>
+<left><h1> <font size="+2"> {{ teacher }}'s {{ class1 }} </font> </h1></left>
+<strong> <font color="red"> Please note! </font>  </strong> If you do not fill out all of the fields, your review will not be viewable on the website. <br>
 
+<br>
 <form action="/reviewed" method="post">
-    <left> <strong> On a scale of 1 to 5, how would you rate this teacher overall? </strong> </left>
+    <left> <strong> On a scale of 1 to 5, how would you rate {{ teacher }} overall? </strong> </left>
     <div class="form-group">
         <input type="radio" name="overall" value="1"> 1 = TERRIBLE<br>
         <input type="radio" name="overall" value="2"> 2<br>
@@ -23,7 +25,7 @@
 
 <br>
 
-    <left> <strong> On a scale of 1 to 5, how would you rate this teacher's clarity in teaching? </strong> </left>
+    <left> <strong> On a scale of 1 to 5, how would you rate {{ teacher }}'s clarity in teaching? </strong> </left>
     <div class="form-group">
         <input type="radio" name="clarity" value="1"> 1 = TOTALLY UNCLEAR<br>
         <input type="radio" name="clarity" value="2"> 2<br>
@@ -34,7 +36,7 @@
 
 <br>
 
-    <left> <strong> On a scale of 1 to 5, how would you rate this teacher's friendliness? </strong> </left>
+    <left> <strong> On a scale of 1 to 5, how would you rate {{ teacher }}'s friendliness? </strong> </left>
     <div class="form-group">
         <input type="radio" name="friendliness" value="1"> 1 = COLD LIKE A CHICAGO WINTER<br>
         <input type="radio" name="friendliness" value="2"> 2<br>
