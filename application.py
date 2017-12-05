@@ -36,7 +36,7 @@ db = SQL("sqlite:///wyguide.db")
 @app.route("/")
 @login_required
 def index():
-    new=db.execute("SELECT name, overall, comments FROM teacher_info ORDER BY overall DESC LIMIT 10")
+    new=db.execute("SELECT name, overall, comments FROM teacher_info ORDER BY timestamp ASC LIMIT 10")
     return render_template("index.html", teacher_info = new)
 
 @app.route("/about")
