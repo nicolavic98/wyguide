@@ -54,11 +54,11 @@ def login():
 
         # Ensure username was submitted
         if not request.form.get("username"):
-            return apology("must provide username", 403)
+            return apology("You must provide a username", 403)
 
         # Ensure password was submitted
         elif not request.form.get("password"):
-            return apology("Where the hell is your password", 403)
+            return apology("You must provide a password", 403)
 
         # Query database for username
         rows = db.execute("SELECT * FROM users WHERE username = :username",
@@ -66,7 +66,7 @@ def login():
 
         # Ensure username exists and password is correct
         if len(rows) != 1 or not check_password_hash(rows[0]["hash"], request.form.get("password")):
-            return apology("GET YOUR USERNAME AND PASSWORD RIGHT", 403)
+            return apology("Your username and/or password is incorrect!", 403)
 
         # Remember which user has logged in
         session["user_id"] = rows[0]["id"]
